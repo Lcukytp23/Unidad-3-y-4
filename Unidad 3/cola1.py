@@ -26,18 +26,15 @@ def ingresar_datos_cola():
             print("Por favor, ingrese un número entero válido.")
     return cola
 
-# Ingreso de datos para las colas
 print("Ingrese los elementos para la Cola A:")
 cola_a = ingresar_datos_cola()
 
 print("Ingrese los elementos para la Cola B:")
 cola_b = ingresar_datos_cola()
 
-# Sumar colas
 try:
     cola_resultado = sumar_colas(cola_a, cola_b)
 
-    # Mostrar tabla con la cola que se está sumando
     print("\nSuma de las colas a y b:")
     while not cola_resultado.empty():
         fila = []
