@@ -18,7 +18,6 @@ class SeguroApp:
         else:
             return None
 
-# Función principal
 def main():
     app = SeguroApp()
 
