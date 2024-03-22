@@ -1,53 +1,74 @@
-class NodoCola:
-    def __init__(self, valor):
-        self.valor = valor
-        self.siguiente = None
+class Order:
+    def _init_(self, qtty, customer):
+        self.customer = customer
+        self.qtty = qtty
+    
+    def print_info(self):
+        print("     Customer: " + self.get_customer())
+        print("     Quantity: " + str(self.get_qty()))
+        print("     ------------")
 
-class Cola:
-    def __init__(self):
-        self.primero = None
-        self.ultimo = None
+    def get_qty(self):
+        return self.qtty
 
-    def esta_vacia(self):
-        return self.primero is None
+    def get_customer(self):
+        return self.customer
 
-    def encolar(self, valor):
-        nuevo_nodo = NodoCola(valor)
-        if self.esta_vacia():
-            self.primero = nuevo_nodo
-            self.ultimo = nuevo_nodo
-        else:
-            self.ultimo.siguiente = nuevo_nodo
-            self.ultimo = nuevo_nodo
 
-    def desencolar(self):
-        if self.esta_vacia():
-            raise IndexError("La cola está vacía")
-        valor = self.primero.valor
-        self.primero = self.primero.siguiente
-        if self.primero is None:
-            self.ultimo = None
-        return valor
+class QueueInterface:
+    def size(self):
+        pass
 
-    def ver_primero(self):
-        if self.esta_vacia():
-            raise IndexError("La cola está vacía")
-        return self.primero.valor
+    def is_empty(self):
+        pass
 
-    def __str__(self):
-        valores = []
-        nodo_actual = self.primero
-        while nodo_actual:
-            valores.append(nodo_actual.valor)
-            nodo_actual = nodo_actual.siguiente
-        return str(valores)
+    def front(self):
+        pass
 
-# Ejemplo de uso
-cola = Cola()
-cola.encolar(1)
-cola.encolar(2)
-cola.encolar(3)
-print("Cola actual:", cola)
-print("Primero de la cola:", cola.ver_primero())
-print("Desencolando:", cola.desencolar())
-print("Cola después de desencolar:", cola)
+    def enqueue(self, info):
+        pass
+
+    def dequeue(self):
+        pass
+
+
+class QueueDump:
+    def _init_(self):
+        self.queue = []
+
+    def size(self):
+        return len(self.queue)
+
+    def is_empty(self):
+        return len(self.queue) == 0
+
+    def front(self):
+        if self.is_empty():
+            return None
+        return self.queue[0]
+
+    def enqueue(self, info):
+        self.queue.append(info)
+
+    def dequeue(self):
+        if self.is_empty():
+            return None
+        return self.queue.pop(0)
+
+
+# Implementación de QueueDump
+queue_dump = QueueDump()
+queue_dump.enqueue(Order(20, "cust1"))
+queue_dump.enqueue(Order(30, "cust2"))
+queue_dump.enqueue(Order(40, "cust3"))
+queue_dump.enqueue(Order(50, "cust3"))
+
+# Mostrar el estado de la cola
+print("********* QUEUE DUMP *********")
+print("Size:", queue_dump.size())
+print("** Elementos:")
+for i in range(queue_dump.size()):
+    element = queue_dump.dequeue()
+    print("  ** Element", i+1)
+    element.print_info()
+print("")
