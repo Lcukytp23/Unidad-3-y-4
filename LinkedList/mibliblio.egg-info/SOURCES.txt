@@ -1,0 +1,6 @@
+mibliblio.py
+setup.py
+mibliblio.egg-info/PKG-INFO
+mibliblio.egg-info/SOURCES.txt
+mibliblio.egg-info/dependency_links.txt
+mibliblio.egg-info/top_level.txt
